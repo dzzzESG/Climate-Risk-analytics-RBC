@@ -1,5 +1,5 @@
 """
-ClimaVaR Terminal v0.9-bank — Climate Risk Analytics Platform
+ClimaVaR Terminal v1.0-bank — Climate Risk Analytics Platform
 Workspace: Royal Bank of Canada (RY) — Climate Credit Risk (demo)
 
 What this demonstrates
@@ -56,81 +56,267 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap');
+
+/* ═══════════════════════════════════════════════════════════
+   RBC BRAND TOKENS
+   Bright Blue #0051A5 · Dark Blue #003168 · Yellow #FEDF01
+   ═══════════════════════════════════════════════════════════ */
 :root {
-  --bg-page:#F4F6F9; --bg-card:#FFFFFF; --bg-card-alt:#F8FAFC; --bg-note:#F0F9FF;
-  --bg-tab-bar:#E8EDF2; --bg-tab-active:#FFFFFF;
-  --border:#E2E8F0; --border-md:#D1D5DB; --border-note:#0EA5E9;
-  --text-h:#0D2137; --text-body:#374151; --text-sec:#64748B; --text-muted:#94A3B8;
-  --text-note:#0C4A6E; --text-note-b:#0369A1; --hdr-rule:2px solid #0D2137;
+  /* Light mode */
+  --rbc-blue:       #0051A5;
+  --rbc-dark-blue:  #003168;
+  --rbc-yellow:     #FEDF01;
+  --rbc-yellow-dim: #FFF3A0;
+
+  --bg-page:        #F2F5F9;
+  --bg-card:        #FFFFFF;
+  --bg-card-alt:    #F7FAFC;
+  --bg-note:        #EBF3FF;
+
+  --bg-tab-bar:     #E4ECF5;
+  --bg-tab-active:  #FFFFFF;
+
+  --border:         #D8E4F0;
+  --border-md:      #B8CCDF;
+  --border-note:    #0051A5;
+
+  --text-h:         #003168;
+  --text-body:      #1E3A5F;
+  --text-sec:       #4A6080;
+  --text-muted:     #7A96B0;
+  --text-note:      #003168;
+  --text-note-b:    #0051A5;
+
+  --hdr-rule:       2px solid #0051A5;
+  --accent:         #0051A5;
 }
+
+/* ── Dark mode ────────────────────────────────────────────── */
 @media (prefers-color-scheme: dark) { :root {
-  --bg-page:#0F172A; --bg-card:#1E293B; --bg-card-alt:#162032; --bg-note:#0C2340;
-  --bg-tab-bar:#1E293B; --bg-tab-active:#334155;
-  --border:#334155; --border-md:#475569;
-  --text-h:#F1F5F9; --text-body:#CBD5E1; --text-sec:#94A3B8; --text-muted:#64748B;
-  --text-note:#BAE6FD; --text-note-b:#7DD3FC; --hdr-rule:2px solid #3B82F6; } }
+  --bg-page:        #061629;
+  --bg-card:        #0D2340;
+  --bg-card-alt:    #0A1C33;
+  --bg-note:        #0A1C33;
+  --bg-tab-bar:     #0D2340;
+  --bg-tab-active:  #1A3A60;
+  --border:         #1E3A60;
+  --border-md:      #2A5080;
+  --border-note:    #FEDF01;
+  --text-h:         #FFFFFF;
+  --text-body:      #D0E4F8;
+  --text-sec:       #90B8D8;
+  --text-muted:     #6090B0;
+  --text-note:      #D0E4F8;
+  --text-note-b:    #FEDF01;
+  --hdr-rule:       2px solid #FEDF01;
+  --accent:         #FEDF01;
+} }
+
 [data-theme="dark"] {
-  --bg-page:#0F172A; --bg-card:#1E293B; --bg-card-alt:#162032; --bg-note:#0C2340;
-  --bg-tab-bar:#1E293B; --bg-tab-active:#334155;
-  --border:#334155; --border-md:#475569;
-  --text-h:#F1F5F9; --text-body:#CBD5E1; --text-sec:#94A3B8; --text-muted:#64748B;
-  --text-note:#BAE6FD; --text-note-b:#7DD3FC; --hdr-rule:2px solid #3B82F6; }
+  --bg-page:        #061629;
+  --bg-card:        #0D2340;
+  --bg-card-alt:    #0A1C33;
+  --bg-note:        #0A1C33;
+  --bg-tab-bar:     #0D2340;
+  --bg-tab-active:  #1A3A60;
+  --border:         #1E3A60;
+  --border-md:      #2A5080;
+  --border-note:    #FEDF01;
+  --text-h:         #FFFFFF;
+  --text-body:      #D0E4F8;
+  --text-sec:       #90B8D8;
+  --text-muted:     #6090B0;
+  --text-note:      #D0E4F8;
+  --text-note-b:    #FEDF01;
+  --hdr-rule:       2px solid #FEDF01;
+  --accent:         #FEDF01;
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
 html, body, [class*="css"] { font-family:'Inter',sans-serif; }
-.main { background:var(--bg-page)!important; }
+.main  { background:var(--bg-page)!important; }
 .block-container { padding:1.8rem 2.4rem 2rem; }
-section[data-testid="stSidebar"] { background:#0D2137!important; }
-section[data-testid="stSidebar"] * { color:#CBD5E1!important; }
-section[data-testid="stSidebar"] .stSelectbox label, section[data-testid="stSidebar"] .stSlider label,
+
+/* ── Sidebar — RBC Dark Blue ──────────────────────────────── */
+section[data-testid="stSidebar"] { background:#003168!important; }
+section[data-testid="stSidebar"] * { color:#C8DCEE!important; }
+section[data-testid="stSidebar"] .stSelectbox label,
+section[data-testid="stSidebar"] .stSlider label,
 section[data-testid="stSidebar"] .stNumberInput label {
-  color:#94A3B8!important; font-size:.71rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; }
+  color:#90B8D8!important; font-size:.71rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.07em; }
+section[data-testid="stSidebar"] hr { border-color:rgba(255,255,255,.08)!important; }
 section[data-testid="stSidebar"] .stSelectbox > div > div {
-  background:#1E3A5F!important; border-color:#2D5A8C!important; color:#E2E8F0!important; }
+  background:#0051A5!important; border-color:#2A70C0!important; color:#FFFFFF!important; }
 section[data-testid="stSidebar"] input[type="number"] {
-  color:#F1F5F9!important; background:#1E3A5F!important; border:1px solid #2D5A8C!important;
-  border-radius:6px!important; font-weight:600!important; }
-.sb-lbl { font-size:.67rem; font-weight:700; color:#475569; text-transform:uppercase;
-  letter-spacing:.1em; border-top:1px solid rgba(255,255,255,.06); padding-top:1rem; margin:1rem 0 .3rem; }
-.page-hdr h1 { font-size:1.32rem; font-weight:700; color:var(--text-h)!important; margin:0 0 .2rem; letter-spacing:-.4px; }
-.page-hdr p { font-size:.85rem; color:var(--text-sec)!important; margin:0; }
-.hdr-rule { border:none; border-top:var(--hdr-rule); margin:.8rem 0 1.5rem; }
-.kpi { background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:.95rem 1.2rem;
+  color:#FFFFFF!important; background:#0051A5!important;
+  border:1px solid #2A70C0!important; border-radius:6px!important; font-weight:600!important; }
+.sb-lbl { font-size:.67rem; font-weight:700; color:#507090;
+  text-transform:uppercase; letter-spacing:.1em;
+  border-top:1px solid rgba(255,255,255,.07); padding-top:1rem; margin:1rem 0 .3rem; }
+
+/* ── Page header ──────────────────────────────────────────── */
+.page-hdr h1 { font-size:1.32rem; font-weight:700;
+  color:var(--text-h)!important; margin:0 0 .2rem; letter-spacing:-.4px; }
+.page-hdr p  { font-size:.85rem; color:var(--text-sec)!important; margin:0; }
+.hdr-rule    { border:none; border-top:var(--hdr-rule); margin:.8rem 0 1.5rem; }
+
+/* ── KPI cards ────────────────────────────────────────────── */
+.kpi {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:10px; padding:.95rem 1.2rem;
   transition:box-shadow .15s ease, border-color .15s ease, transform .15s ease; }
-.kpi:hover { box-shadow:0 4px 16px rgba(13,33,55,.10); border-color:var(--border-md); transform:translateY(-1px); }
-.kpi-lbl { font-size:.66rem; font-weight:700; color:var(--text-sec)!important; text-transform:uppercase;
+.kpi:hover {
+  box-shadow:0 4px 18px rgba(0,49,104,.18);
+  border-color:var(--rbc-blue); transform:translateY(-1px); }
+.kpi-lbl { font-size:.66rem; font-weight:700;
+  color:var(--text-sec)!important; text-transform:uppercase;
   letter-spacing:.08em; margin-bottom:5px; }
-.kpi-val { font-size:1.4rem; font-weight:700; color:var(--text-h)!important; line-height:1.1;
-  font-family:'JetBrains Mono',monospace; font-feature-settings:'tnum'; letter-spacing:-.4px; }
+.kpi-val {
+  font-size:1.35rem; font-weight:700;
+  color:var(--text-h)!important;
+  line-height:1.1;
+  font-family:'JetBrains Mono',monospace;
+  font-feature-settings:'tnum'; letter-spacing:-.4px; }
 .kpi-sub { font-size:.73rem; color:var(--text-muted)!important; margin-top:3px; }
-.kpi-neg{border-left:3px solid #EF4444;} .kpi-warn{border-left:3px solid #F59E0B;}
-.kpi-pos{border-left:3px solid #22C55E;} .kpi-inf{border-left:3px solid #3B82F6;}
+
+/* RBC-tinted accent bars */
+.kpi-neg  { border-left:3px solid #DC2626; }
+.kpi-warn { border-left:3px solid #D97706; }
+.kpi-pos  { border-left:3px solid #16A34A; }
+.kpi-inf  { border-left:3px solid var(--rbc-blue); }
+
+/* ── Section title ────────────────────────────────────────── */
 .sec { font-size:.98rem; font-weight:600; color:var(--text-h)!important;
   border-bottom:2px solid var(--border); padding-bottom:.55rem; margin-bottom:1.15rem; }
-.note { background:var(--bg-note); border-left:3px solid var(--border-note); border-radius:0 6px 6px 0;
-  padding:.65rem 1rem; font-size:.8rem; color:var(--text-note)!important; margin-top:.6rem; }
+
+/* ── Note box ─────────────────────────────────────────────── */
+.note {
+  background:var(--bg-note); border-left:3px solid var(--border-note);
+  border-radius:0 6px 6px 0; padding:.65rem 1rem;
+  font-size:.8rem; color:var(--text-note)!important; margin-top:.6rem; }
 .note b { color:var(--text-note-b)!important; }
-.mbox { background:var(--bg-card-alt); border:1px solid var(--border); border-radius:8px;
-  padding:.75rem 1rem; font-size:.78rem; color:var(--text-body)!important; margin-top:.5rem; }
-.stTabs [data-baseweb="tab-list"] { background:var(--bg-tab-bar); border-radius:9px; padding:4px; gap:3px; display:flex!important; }
-.stTabs [data-baseweb="tab"] { border-radius:6px; padding:8px 4px; font-size:.84rem; font-weight:500;
-  color:var(--text-sec)!important; flex:1 1 0!important; text-align:center!important; min-width:0!important; white-space:nowrap; }
-.stTabs [aria-selected="true"] { background:var(--bg-tab-active)!important; color:var(--text-h)!important;
-  box-shadow:0 1px 3px rgba(0,0,0,.15); font-weight:700!important; }
-div[data-testid="stExpander"] { border:1px solid var(--border)!important; border-radius:9px!important; }
-.stDownloadButton button { background:#0D2137!important; color:#F1F5F9!important; border:none!important;
-  border-radius:6px!important; font-weight:600!important; font-size:.82rem!important; }
-.pill { display:inline-flex; align-items:center; gap:6px; padding:3px 11px; border-radius:999px;
-  font-size:.68rem; font-weight:600; font-family:'JetBrains Mono',monospace;
-  border:1px solid var(--border); background:var(--bg-card); color:var(--text-sec); white-space:nowrap; }
+
+/* ── Method box ───────────────────────────────────────────── */
+.mbox {
+  background:var(--bg-card-alt); border:1px solid var(--border);
+  border-radius:8px; padding:.75rem 1rem;
+  font-size:.78rem; color:var(--text-body)!important; margin-top:.5rem; }
+
+/* ── Tabs ─────────────────────────────────────────────────── */
+.stTabs [data-baseweb="tab-list"] {
+  background:var(--bg-tab-bar); border-radius:9px;
+  padding:4px; gap:3px; display:flex!important; }
+.stTabs [data-baseweb="tab"] {
+  border-radius:6px; padding:8px 4px; font-size:.84rem; font-weight:500;
+  color:var(--text-sec)!important; flex:1 1 0!important;
+  text-align:center!important; min-width:0!important; white-space:nowrap; }
+.stTabs [aria-selected="true"] {
+  background:var(--bg-tab-active)!important;
+  color:var(--text-h)!important;
+  box-shadow:0 1px 3px rgba(0,49,104,.20);
+  font-weight:700!important; }
+
+/* ── Expander ─────────────────────────────────────────────── */
+div[data-testid="stExpander"] {
+  border:1px solid var(--border)!important; border-radius:9px!important; }
+
+/* ── Download button — RBC Blue ───────────────────────────── */
+.stDownloadButton button {
+  background:#0051A5!important; color:#FFFFFF!important;
+  border:none!important; border-radius:6px!important;
+  font-weight:600!important; font-size:.82rem!important; }
+.stDownloadButton button:hover { background:#003168!important; }
+
+/* ── Status pills ─────────────────────────────────────────── */
+.pill {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:3px 11px; border-radius:999px; font-size:.68rem; font-weight:600;
+  font-family:'JetBrains Mono',monospace;
+  border:1px solid var(--border); background:var(--bg-card);
+  color:var(--text-sec); white-space:nowrap; }
 .pill .dot { width:7px; height:7px; border-radius:50%; flex:none; }
-.crumb { font-size:.68rem; font-weight:700; color:var(--text-muted)!important; text-transform:uppercase;
-  letter-spacing:.09em; margin-bottom:4px; }
-.topbar { display:flex; justify-content:space-between; align-items:flex-end; gap:14px; flex-wrap:wrap; }
+
+/* ── Breadcrumb / topbar ──────────────────────────────────── */
+.crumb { font-size:.68rem; font-weight:700; color:var(--text-muted)!important;
+  text-transform:uppercase; letter-spacing:.09em; margin-bottom:4px; }
+.topbar { display:flex; justify-content:space-between;
+  align-items:flex-end; gap:14px; flex-wrap:wrap; }
 .topbar .chips { display:flex; gap:7px; flex-wrap:wrap; padding-bottom:3px; }
-.ver-pill { font-family:'JetBrains Mono',monospace; font-size:.6rem; font-weight:700; color:#7DD3FC;
-  background:#0C2340; border:1px solid #1E3A5F; border-radius:999px; padding:2px 8px; }
-.js-plotly-plot .plotly .xtick text, .js-plotly-plot .plotly .ytick text { fill:#1E293B!important; }
-.js-plotly-plot .plotly .gtitle text { fill:#0D2137!important; }
-.js-plotly-plot .plotly .legend text { fill:#1E293B!important; }
+
+/* ── Version badge ────────────────────────────────────────── */
+.ver-pill {
+  font-family:'JetBrains Mono',monospace; font-size:.6rem; font-weight:700;
+  color:#FEDF01; background:#003168;
+  border:1px solid #0051A5; border-radius:999px; padding:2px 8px; }
+
+/* ═══════════════════════════════════════════════════════════
+   PLOTLY CHART TEXT — bright in BOTH modes
+   Light: near-black on white bg. Dark: white/light-blue on dark bg.
+   ═══════════════════════════════════════════════════════════ */
+/* Light mode defaults */
+.js-plotly-plot .plotly .xtick text,
+.js-plotly-plot .plotly .ytick text       { fill:#1E3A5F!important; }
+.js-plotly-plot .plotly .gtitle text,
+.js-plotly-plot .plotly .g-title text     { fill:#003168!important; }
+.js-plotly-plot .plotly .xtitle text,
+.js-plotly-plot .plotly .ytitle text,
+.js-plotly-plot .plotly .g-xtitle text,
+.js-plotly-plot .plotly .g-ytitle text    { fill:#1E3A5F!important; }
+.js-plotly-plot .plotly .legend text,
+.js-plotly-plot .plotly .legendtext       { fill:#1E3A5F!important; }
+.js-plotly-plot .plotly .annotation text,
+.js-plotly-plot .plotly .annotation-text  { fill:#1E3A5F!important; }
+.js-plotly-plot .plotly .number text,
+.js-plotly-plot .plotly .delta text       { fill:#003168!important; }
+.js-plotly-plot .plotly .infolayer text   { fill:#1E3A5F!important; }
+
+/* Dark mode — FORCE white/yellow text so numbers are always readable */
+@media (prefers-color-scheme: dark) {
+  .js-plotly-plot .plotly .xtick text,
+  .js-plotly-plot .plotly .ytick text     { fill:#D0E4F8!important; }
+  .js-plotly-plot .plotly .gtitle text,
+  .js-plotly-plot .plotly .g-title text   { fill:#FFFFFF!important; }
+  .js-plotly-plot .plotly .xtitle text,
+  .js-plotly-plot .plotly .ytitle text,
+  .js-plotly-plot .plotly .g-xtitle text,
+  .js-plotly-plot .plotly .g-ytitle text  { fill:#90B8D8!important; }
+  .js-plotly-plot .plotly .legend text,
+  .js-plotly-plot .plotly .legendtext     { fill:#D0E4F8!important; }
+  .js-plotly-plot .plotly .annotation text,
+  .js-plotly-plot .plotly .annotation-text{ fill:#FEDF01!important; }
+  .js-plotly-plot .plotly .number text,
+  .js-plotly-plot .plotly .delta text     { fill:#FFFFFF!important; }
+  .js-plotly-plot .plotly .infolayer text { fill:#D0E4F8!important; }
+  .js-plotly-plot .plotly .bartext text,
+  .js-plotly-plot .plotly .bars .textpoint text { fill:#FFFFFF!important; }
+  .js-plotly-plot .plotly .cbaxis text    { fill:#90B8D8!important; }
+  .js-plotly-plot .plotly .zl path,
+  .js-plotly-plot .plotly .gridlayer path { stroke:rgba(144,184,216,.18)!important; }
+}
+[data-theme="dark"] .js-plotly-plot .plotly .xtick text,
+[data-theme="dark"] .js-plotly-plot .plotly .ytick text     { fill:#D0E4F8!important; }
+[data-theme="dark"] .js-plotly-plot .plotly .gtitle text,
+[data-theme="dark"] .js-plotly-plot .plotly .g-title text   { fill:#FFFFFF!important; }
+[data-theme="dark"] .js-plotly-plot .plotly .xtitle text,
+[data-theme="dark"] .js-plotly-plot .plotly .ytitle text,
+[data-theme="dark"] .js-plotly-plot .plotly .g-xtitle text,
+[data-theme="dark"] .js-plotly-plot .plotly .g-ytitle text  { fill:#90B8D8!important; }
+[data-theme="dark"] .js-plotly-plot .plotly .legend text,
+[data-theme="dark"] .js-plotly-plot .plotly .legendtext     { fill:#D0E4F8!important; }
+[data-theme="dark"] .js-plotly-plot .plotly .annotation text,
+[data-theme="dark"] .js-plotly-plot .plotly .annotation-text{ fill:#FEDF01!important; }
+[data-theme="dark"] .js-plotly-plot .plotly .number text,
+[data-theme="dark"] .js-plotly-plot .plotly .delta text     { fill:#FFFFFF!important; }
+[data-theme="dark"] .js-plotly-plot .plotly .infolayer text { fill:#D0E4F8!important; }
+[data-theme="dark"] .js-plotly-plot .plotly .bartext text,
+[data-theme="dark"] .js-plotly-plot .plotly .bars .textpoint text { fill:#FFFFFF!important; }
+[data-theme="dark"] .js-plotly-plot .plotly .cbaxis text    { fill:#90B8D8!important; }
+[data-theme="dark"] .js-plotly-plot .plotly .zl path,
+[data-theme="dark"] .js-plotly-plot .plotly .gridlayer path { stroke:rgba(144,184,216,.18)!important; }
+
+/* ── Dataframe ────────────────────────────────────────────── */
+[data-testid="stDataFrame"] { border-radius:8px!important; }
 [data-testid="stDataFrame"] * { font-feature-settings:'tnum'; }
 </style>
 """, unsafe_allow_html=True)
@@ -261,9 +447,9 @@ with st.sidebar:
     <div style="padding:.5rem 0 .9rem;border-bottom:1px solid rgba(255,255,255,.07)">
       <div style="display:flex;align-items:center;gap:9px">
         <div style="width:27px;height:27px;border-radius:7px;flex:none;
-                    background:linear-gradient(135deg,#3B82F6 0%,#059669 100%);
+                    background:linear-gradient(135deg,#0051A5 0%,#FEDF01 100%);
                     display:flex;align-items:center;justify-content:center;
-                    color:white;font-weight:800;font-size:.85rem;
+                    color:#003168;font-weight:800;font-size:.85rem;
                     font-family:'JetBrains Mono',monospace">◢</div>
         <div style="min-width:0">
           <div style="font-size:.95rem;font-weight:700;color:#F1F5F9;letter-spacing:-.2px;
@@ -274,7 +460,7 @@ with st.sidebar:
         <span class="ver-pill" style="margin-left:auto">{APP_VER}</span>
       </div>
     </div>
-    <div style="margin-top:.9rem;background:#0A1929;border:1px solid #1E3A5F;
+    <div style="margin-top:.9rem;background:#002050;border:1px solid #0051A5;
                 border-radius:8px;padding:.6rem .8rem">
       <div style="font-size:.56rem;font-weight:700;letter-spacing:.11em;color:#334155;
                   text-transform:uppercase;margin-bottom:3px">Workspace · Bank</div>
@@ -309,7 +495,7 @@ with st.sidebar:
 
     st.divider()
     st.markdown(f"""
-    <div style="background:#0A1929;border-radius:8px;padding:.7rem .9rem;border:1px solid #1E3A5F">
+    <div style="background:#002050;border-radius:8px;padding:.7rem .9rem;border:1px solid #0051A5">
       <div style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;
                   color:#334155;margin-bottom:.35rem">Reference Capital (FY2024)</div>
       <div style="font-size:.72rem;color:#94A3B8;line-height:1.9">
@@ -396,10 +582,174 @@ tabA, tabB, tabC, tabD = st.tabs([
 ])
 
 # ════════════════════════════════════════════════════════════════
-#  TAB A — SECTOR OVERVIEW
+#  TAB A — SECTOR OVERVIEW  (landing page)
 # ════════════════════════════════════════════════════════════════
 with tabA:
-    st.markdown('<div class="sec">ECL Uplift by Sector — Transition vs Physical Attribution</div>',
+
+    # ── HERO: 2×2 Risk Matrix ─────────────────────────────────────────────────
+    # X = transition risk intensity (bps from PD channel, normalised)
+    # Y = physical risk intensity   (bps from LGD channel, normalised)
+    # bubble size = EAD; colour = absolute ECL uplift
+    st.markdown('<div class="sec">Risk Matrix — Transition vs Physical Intensity by Sector</div>',
+                unsafe_allow_html=True)
+
+    tr_bps = df["Transition_M"] / df["EAD_M"] * 1e4
+    ph_bps = df["Physical_M"]   / df["EAD_M"] * 1e4
+    tr_mid = float(tr_bps.median())
+    ph_mid = float(ph_bps.median())
+
+    fig_mat = go.Figure()
+    # Quadrant shading
+    xmax = tr_bps.max() * 1.45
+    ymax = ph_bps.max() * 1.55
+    for (x0, x1, y0, y1, col, label) in [
+        (0,      tr_mid, ph_mid, ymax,  "rgba(234,88,12,.06)",  "Physical-dominant"),
+        (tr_mid, xmax,   ph_mid, ymax,  "rgba(220,38,38,.09)",  "Dual risk"),
+        (0,      tr_mid, 0,      ph_mid,"rgba(203,213,225,.10)","Lower risk"),
+        (tr_mid, xmax,   0,      ph_mid,"rgba(29,78,216,.07)",  "Transition-dominant"),
+    ]:
+        fig_mat.add_shape(type="rect", x0=x0, x1=x1, y0=y0, y1=y1,
+                          fillcolor=col, line=dict(width=0), layer="below")
+        cx = (x0 + x1) / 2; cy = (y0 + y1) / 2
+        fig_mat.add_annotation(x=cx, y=cy, text=f"<i>{label}</i>",
+            showarrow=False, font=dict(size=10, color="#94A3B8"),
+            xanchor="center", yanchor="middle")
+    # Median lines
+    fig_mat.add_shape(type="line", x0=tr_mid, x1=tr_mid, y0=0, y1=ymax,
+                      line=dict(color="#CBD5E1", dash="dash", width=1))
+    fig_mat.add_shape(type="line", x0=0, x1=xmax, y0=ph_mid, y1=ph_mid,
+                      line=dict(color="#CBD5E1", dash="dash", width=1))
+    # Bubbles
+    fig_mat.add_trace(go.Scatter(
+        x=tr_bps, y=ph_bps,
+        mode="markers+text",
+        text=[s.split(" (")[0][:16] for s in df["Sector"]],
+        textposition="top center",
+        textfont=dict(size=10, color="#1E3A5F"),
+        marker=dict(
+            size=np.sqrt(df["EAD_M"] / 1000).clip(lower=2) * 4.5 + 6,
+            color=df["Uplift_M"],
+            colorscale=[[0,"#DBEAFE"],[0.4,"#FDE68A"],[0.75,"#FECACA"],[1,"#7F1D1D"]],
+            colorbar=dict(title=dict(text="ECL uplift (CAD $M)", font=dict(size=10, color="#1E3A5F")),
+                          thickness=11, tickfont=dict(size=10, color="#1E3A5F")),
+            line=dict(width=1.2, color="white"), opacity=0.92,
+        ),
+        customdata=np.stack([df["EAD_M"]/1000, df["Uplift_M"], df["Uplift_bps"]], axis=-1),
+        hovertemplate=(
+            "<b>%{text}</b><br>"
+            "EAD: CAD %{customdata[0]:.0f}B<br>"
+            "ECL uplift: CAD %{customdata[1]:,.0f}M<br>"
+            "Transition intensity: %{x:.0f} bps<br>"
+            "Physical intensity: %{y:.0f} bps<extra></extra>"
+        ),
+    ))
+    fig_mat.update_layout(
+        height=420, template="plotly_white",
+        xaxis=dict(title="Transition Risk Intensity (bps of sector EAD, PD channel)",
+                   range=[0, xmax], tickfont=dict(size=11, color="#1E3A5F")),
+        yaxis=dict(title="Physical Risk Intensity (bps of sector EAD, LGD channel)",
+                   range=[0, ymax], tickfont=dict(size=11, color="#1E3A5F")),
+        showlegend=False,
+        margin=dict(t=10, b=50, l=10, r=80),
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+    )
+    _chart(fig_mat)
+    st.markdown(f"""
+    <div class="mbox" style="font-size:.77rem;margin-bottom:1.2rem">
+      <b>How to read:</b> bubble size = sector EAD; colour = absolute ECL uplift (CAD $M).
+      Dashed lines are portfolio medians. <b>Top-right (dual risk)</b> is the danger zone —
+      nothing sits there, which is the BoC–OSFI 2022 pilot's headline finding:
+      climate credit risk is <i>concentrated, not systemic</i>.
+      <b>Bottom-right (transition-dominant)</b>: Oil &amp; Gas has tiny EAD but extreme
+      transition intensity — a <i>pricing and limits</i> problem.
+      <b>Top-left (physical-dominant)</b>: Agriculture faces flood/drought LGD drift with
+      limited abatement — a <i>collateral monitoring</i> problem.
+      <b>Top-left large bubble</b>: Residential Mortgages — tiny intensity but enormous
+      book, so a <i>data-granularity</i> problem (postal-code flood mapping).
+      Source calibration: β elasticities anchored directionally to
+      <b>BoC–OSFI 2022 Climate Scenario Pilot</b>; physical LGD uplifts are
+      illustrative, calibrated to sector-level collateral hazard exposure
+      (OSFI SCSE 2024 highlights data gaps in this area).
+    </div>""", unsafe_allow_html=True)
+
+    # ── ALL-SCENARIO COMPARISON ───────────────────────────────────────────────
+    st.markdown('<div class="sec" style="font-size:.9rem">Cross-Scenario ECL Uplift — Annual Profile & Total</div>',
+                unsafe_allow_html=True)
+
+    sc_names_all = list(SCENARIOS.keys())
+    # Run all scenarios at current sidebar WACC/horizon/scalers for fair comparison
+    all_results = {}
+    for sn in sc_names_all:
+        df_s, yrs_s, ann_s, ann_tr_s, ann_ph_s = run_bank(sn, horizon, dr_pct, pd_scaler, lgd_scaler)
+        all_results[sn] = {"total": df_s["Uplift_M"].sum(), "annual": ann_s,
+                            "tr": ann_tr_s, "ph": ann_ph_s, "yrs": yrs_s}
+
+    sc1, sc2 = st.columns([3, 2])
+    with sc1:
+        fig_all = go.Figure()
+        for sn in sc_names_all:
+            r = all_results[sn]
+            is_sel = sn == scenario_name
+            fig_all.add_trace(go.Scatter(
+                x=r["yrs"], y=r["annual"],
+                name=sn.split(" — ")[0] if sn.startswith("RCP") else sn.replace("NGFS — ", "NGFS "),
+                line=dict(color=SCENARIOS[sn]["color"],
+                          width=3 if is_sel else 1.5,
+                          dash="solid" if is_sel else "dash"),
+            ))
+        fig_all.add_vline(x=2030, line_dash="dot", line_color="#64748B", line_width=1,
+                          annotation_text="2030 — $170/t anchor",
+                          annotation_font=dict(size=10, color="#4A6080"),
+                          annotation_position="top left")
+        fig_all.update_layout(
+            title=dict(text=f"Annual ECL Uplift — All Scenarios (nominal, {horizon}-yr horizon)",
+                       font=dict(size=12, color="#003168")),
+            height=320, template="plotly_white",
+            xaxis=dict(title="Year", tickfont=dict(size=11, color="#1E3A5F")),
+            yaxis=dict(title="CAD $M / yr", tickfont=dict(size=11, color="#1E3A5F")),
+            legend=dict(font=dict(size=10, color="#1E3A5F"), orientation="h", y=-0.3),
+            margin=dict(t=35, b=80, l=10, r=10),
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
+        _chart(fig_all)
+    with sc2:
+        # Horizontal bar of total PV ECL uplift by scenario, sorted
+        sc_totals = sorted([(sn, all_results[sn]["total"]) for sn in sc_names_all],
+                           key=lambda x: x[1])
+        sc_labels = [sn.split(" — ")[0] if sn.startswith("RCP") else
+                     sn.replace("NGFS — ", "NGFS ") for sn, _ in sc_totals]
+        sc_vals   = [v for _, v in sc_totals]
+        sc_colors = [SCENARIOS[sn]["color"] for sn, _ in sc_totals]
+        sc_active = ["#0D2137" if sn == scenario_name else c
+                     for (sn, _), c in zip(sc_totals, sc_colors)]
+        fig_tot = go.Figure(go.Bar(
+            y=sc_labels, x=sc_vals, orientation="h",
+            marker_color=sc_active, marker_line=dict(width=0),
+            text=[f"CAD {v:,.0f}M" for v in sc_vals],
+            textposition="outside", textfont=dict(size=11, color="#1E3A5F"),
+        ))
+        fig_tot.update_layout(
+            title=dict(text="Total PV ECL Uplift by Scenario",
+                       font=dict(size=12, color="#003168")),
+            height=320, template="plotly_white",
+            xaxis=dict(title="CAD $M (PV)", tickfont=dict(size=11, color="#1E3A5F")),
+            yaxis=dict(tickfont=dict(size=11, color="#1E3A5F")),
+            margin=dict(t=35, b=20, l=10, r=90),
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
+        _chart(fig_tot)
+    st.markdown(f"""
+    <div class="mbox" style="font-size:.76rem;margin-bottom:1.2rem">
+      <b>Policy cliff:</b> the Delayed Transition curve starts low (slow early
+      carbon price rise) then accelerates sharply after 2030 when the federal
+      anchor lifts and policy urgency forces rapid adjustment — the "cliff" shape
+      is diagnostic of this scenario. Current Policies stays flat but accumulates
+      physical LGD drift. Net Zero 2050 peaks early (highest carbon price) but
+      then the physical multiplier is low. All scenarios converge toward similar
+      total losses over 26 years — the difference is <i>when</i> the stress hits,
+      which has very different IFRS 9 staging and provisioning implications.
+    </div>""", unsafe_allow_html=True)
+
+    # ── DETAIL: attribution bar + bubble (kept below the hero charts) ─────────
+    st.markdown('<div class="sec" style="font-size:.88rem">Sector Detail — Current Scenario</div>',
                 unsafe_allow_html=True)
     oc1, oc2 = st.columns([3, 2])
     with oc1:
@@ -412,46 +762,36 @@ with tabA:
         for _, r in dd.iterrows():
             fig.add_annotation(x=r["Uplift_M"], y=r["Sector"],
                 text=f"CAD {r['Uplift_M']:,.0f}M · {r['Uplift_bps']:,.0f} bps",
-                xanchor="left", showarrow=False, xshift=6, font=dict(size=11, color="#1E293B"))
-        fig.update_layout(height=420, template="plotly_white", barmode="stack",
-            xaxis=dict(title="PV ECL Uplift (CAD $M)", tickfont=dict(size=12, color="#1E293B")),
-            yaxis=dict(tickfont=dict(size=11, color="#1E293B")),
-            legend=dict(orientation="h", y=-0.18, font=dict(size=12, color="#1E293B")),
-            margin=dict(t=10, b=55, l=10, r=150),
+                xanchor="left", showarrow=False, xshift=6, font=dict(size=11, color="#1E3A5F"))
+        fig.update_layout(height=380, template="plotly_white", barmode="stack",
+            xaxis=dict(title="PV ECL Uplift (CAD $M)", tickfont=dict(size=12, color="#1E3A5F")),
+            yaxis=dict(tickfont=dict(size=11, color="#1E3A5F")),
+            legend=dict(orientation="h", y=-0.22, font=dict(size=11, color="#1E3A5F")),
+            margin=dict(t=10, b=65, l=10, r=150),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
         _chart(fig)
     with oc2:
-        # Bubble: exposure vs intensity of uplift
         fig_b = go.Figure(go.Scatter(
             x=df["Uplift_bps"], y=df["EAD_M"] / 1000, mode="markers+text",
             text=[s.split(" (")[0][:14] for s in df["Sector"]],
-            textposition="top center", textfont=dict(size=10, color="#374151"),
+            textposition="top center", textfont=dict(size=10, color="#1E3A5F"),
             marker=dict(size=np.sqrt(df["Uplift_M"].clip(lower=1)) * 1.2 + 8,
                         color=df["Uplift_bps"],
-                        colorscale=[[0, "#DBEAFE"], [0.5, "#FDE68A"], [1, "#DC2626"]],
+                        colorscale=[[0,"#DBEAFE"],[0.5,"#FDE68A"],[1,"#DC2626"]],
                         line=dict(width=1, color="white"), opacity=0.9),
             hovertemplate="<b>%{text}</b><br>EAD: CAD %{y:.0f}B<br>Uplift intensity: %{x:,.0f} bps<extra></extra>",
         ))
         fig_b.update_layout(
             title=dict(text="Exposure vs Risk Intensity (bubble = $ uplift)",
-                       font=dict(size=12, color="#0D2137")),
-            height=420, template="plotly_white",
+                       font=dict(size=12, color="#003168")),
+            height=380, template="plotly_white",
             xaxis=dict(title="ECL uplift (bps of sector EAD)", type="log",
-                       tickfont=dict(size=11, color="#1E293B")),
+                       tickfont=dict(size=11, color="#1E3A5F")),
             yaxis=dict(title="Sector EAD (CAD $B)", type="log",
-                       tickfont=dict(size=11, color="#1E293B")),
+                       tickfont=dict(size=11, color="#1E3A5F")),
             margin=dict(t=35, b=40, l=10, r=10),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
         _chart(fig_b)
-    st.markdown("""
-    <div class="mbox">
-      <b>How to read:</b> the loan book splits into two very different problems.
-      Top-right would be systemic (big book, high intensity) — nothing sits there.
-      Bottom-right is the <b>concentration story</b> (Oil &amp; Gas: small EAD, extreme
-      intensity → a pricing/limits problem). Top-left is the <b>aggregation story</b>
-      (Residential Mortgages: tiny intensity, enormous book → a data-granularity
-      problem, i.e. postal-code flood mapping).
-    </div>""", unsafe_allow_html=True)
 
     with st.expander("Sector Table & CSV Export"):
         show = df[["Sector", "EAD_M", "PD0", "LGD0", "PeakPD", "Uplift_M", "Uplift_bps", "Source"]].copy()
@@ -468,6 +808,8 @@ with tabA:
             data=df.to_csv(index=False).encode(),
             file_name=f"RY_climate_ecl_{scenario_name.split(' — ')[0].replace(' ','_')}_{date.today()}.csv",
             mime="text/csv")
+
+
 
 # ════════════════════════════════════════════════════════════════
 #  TAB B — TRANSITION CHANNEL
@@ -487,14 +829,14 @@ with tabB:
                                         line=dict(width=2.2)))
         fig_pd.add_vline(x=2030, line_dash="dot", line_color="#64748B", line_width=1,
                          annotation_text="$170/t federal anchor",
-                         annotation_font=dict(size=10, color="#1E293B"))
+                         annotation_font=dict(size=10, color="#1E3A5F"))
         fig_pd.update_layout(
             title=dict(text=f"Stressed PD Paths — {scenario_name.split(' — ')[0]}",
-                       font=dict(size=13, color="#0D2137")),
+                       font=dict(size=13, color="#003168")),
             height=330, template="plotly_white",
-            xaxis=dict(title="Year", tickfont=dict(size=12, color="#1E293B")),
-            yaxis=dict(title="PD (%)", tickfont=dict(size=12, color="#1E293B")),
-            legend=dict(font=dict(size=11, color="#1E293B"), orientation="h", y=-0.25),
+            xaxis=dict(title="Year", tickfont=dict(size=12, color="#1E3A5F")),
+            yaxis=dict(title="PD (%)", tickfont=dict(size=12, color="#1E3A5F")),
+            legend=dict(font=dict(size=11, color="#1E3A5F"), orientation="h", y=-0.25),
             margin=dict(t=40, b=70, l=10, r=10),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
         _chart(fig_pd)
@@ -507,11 +849,11 @@ with tabB:
             stackgroup="one", line=dict(color="#EA580C", width=0.5), fillcolor="rgba(234,88,12,.45)"))
         fig_tp.update_layout(
             title=dict(text="Annual ECL Uplift — Channel Split (nominal)",
-                       font=dict(size=13, color="#0D2137")),
+                       font=dict(size=13, color="#003168")),
             height=330, template="plotly_white",
-            xaxis=dict(title="Year", tickfont=dict(size=12, color="#1E293B")),
-            yaxis=dict(title="CAD $M/yr", tickfont=dict(size=12, color="#1E293B")),
-            legend=dict(font=dict(size=11, color="#1E293B"), orientation="h", y=-0.25),
+            xaxis=dict(title="Year", tickfont=dict(size=12, color="#1E3A5F")),
+            yaxis=dict(title="CAD $M/yr", tickfont=dict(size=12, color="#1E3A5F")),
+            legend=dict(font=dict(size=11, color="#1E3A5F"), orientation="h", y=-0.25),
             margin=dict(t=40, b=70, l=10, r=10),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
         _chart(fig_tp)
@@ -547,10 +889,10 @@ with tabC:
         fig_l.add_trace(go.Bar(x=names, y=l1, name=f"Stressed LGD ({end_year})", marker_color="#EA580C"))
         fig_l.update_layout(height=330, template="plotly_white", barmode="group",
             title=dict(text=f"Secured Portfolios — LGD Drift under {scenario_name.split(' — ')[0]}",
-                       font=dict(size=13, color="#0D2137")),
-            yaxis=dict(title="LGD (%)", tickfont=dict(size=12, color="#1E293B")),
-            xaxis=dict(tickfont=dict(size=12, color="#1E293B")),
-            legend=dict(font=dict(size=11, color="#1E293B"), orientation="h", y=-0.22),
+                       font=dict(size=13, color="#003168")),
+            yaxis=dict(title="LGD (%)", tickfont=dict(size=12, color="#1E3A5F")),
+            xaxis=dict(tickfont=dict(size=12, color="#1E3A5F")),
+            legend=dict(font=dict(size=11, color="#1E3A5F"), orientation="h", y=-0.22),
             margin=dict(t=40, b=60, l=10, r=10),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
         _chart(fig_l)
