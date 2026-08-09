@@ -138,6 +138,74 @@ div[data-testid="stExpander"] { border:1px solid var(--border)!important; border
 .js-plotly-plot .plotly .gtitle text { fill:#0D2137!important; }
 .js-plotly-plot .plotly .legend text { fill:#1E293B!important; }
 [data-testid="stDataFrame"] * { font-feature-settings:'tnum'; }
+
+/* ── v1.2 visual refresh ───────────────────────────────────────────── */
+.stApp { background:
+  radial-gradient(circle at 82% -8%, rgba(59,130,246,.10), transparent 28rem),
+  linear-gradient(180deg,#F8FAFC 0%,#F3F6FA 100%); }
+.block-container { max-width:1480px; padding:2rem 2.7rem 3.5rem; }
+section[data-testid="stSidebar"] { background:linear-gradient(180deg,#081B2F 0%,#102D49 100%)!important;
+  border-right:1px solid rgba(148,163,184,.16); }
+section[data-testid="stSidebar"] > div { padding-top:1.1rem; }
+section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
+  font-size:.66rem!important; letter-spacing:.08em; color:#91A7BC!important; }
+section[data-testid="stSidebar"] div[data-baseweb="select"] > div,
+section[data-testid="stSidebar"] [data-testid="stNumberInput"] > div > div {
+  background:rgba(30,58,95,.72)!important; border:1px solid rgba(125,211,252,.16)!important;
+  border-radius:9px!important; min-height:42px; }
+.hero { background:linear-gradient(120deg,#FFFFFF 0%,#F8FBFF 64%,#EEF6FF 100%);
+  border:1px solid #DCE6F1; border-radius:16px; padding:1.25rem 1.4rem;
+  box-shadow:0 8px 30px rgba(15,23,42,.055); margin-bottom:1rem; }
+.hero .page-hdr h1 { font-size:1.5rem; letter-spacing:-.035em; }
+.hero .page-hdr h1 { color:#102A43!important; }
+.hero .page-hdr p { margin-top:.35rem; color:#62748A!important; }
+.hero .crumb { color:#3B82F6!important; }
+.hdr-rule { display:none; }
+.chips { max-width:650px; justify-content:flex-end; }
+.pill { background:rgba(255,255,255,.86); border-color:#D8E3EF; padding:5px 10px;
+  box-shadow:0 1px 2px rgba(15,23,42,.03); }
+.note { border:1px solid #D7EAF8; border-left:3px solid #38BDF8; border-radius:9px;
+  line-height:1.55; box-shadow:0 2px 8px rgba(15,23,42,.025);
+  background:#F0F8FF!important; color:#24435E!important; }
+.note b { color:#0B6095!important; }
+.mbox { line-height:1.62; border-color:#E1E8F0; background:#F8FAFC!important;
+  color:#3C4D61!important; }
+.mbox b { color:#183B56!important; }
+.sec { margin-top:.35rem; padding:.25rem 0 .65rem; font-size:1.02rem;
+  border-bottom:1px solid #DCE5EF; letter-spacing:-.015em; color:#17324D!important; }
+.kpi-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; margin:.9rem 0 1rem; }
+.kpi { min-height:102px; padding:1rem 1.05rem; border-radius:12px;
+  box-shadow:0 3px 14px rgba(15,23,42,.04); background:#FFFFFF!important;
+  border-color:#DCE5EF!important; }
+.kpi-lbl { color:#718096!important; }
+.kpi-val { color:#102A43!important; }
+.kpi-sub { color:#8A98A8!important; }
+.kpi-val { margin-top:7px; }
+.stTabs [data-baseweb="tab-list"] { display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr)); gap:5px; padding:6px;
+  background:#E6ECF3; border-radius:12px; margin:1.1rem 0 1.35rem; }
+.stTabs [data-baseweb="tab"] { min-height:42px; padding:8px 10px; border-radius:8px;
+  font-size:.79rem; overflow:hidden; text-overflow:ellipsis; color:#60758A!important; }
+.stTabs [aria-selected="true"] { color:#0B3155!important; background:#FFFFFF!important;
+  box-shadow:0 2px 8px rgba(15,23,42,.10); }
+.stTabs [aria-selected="true"] p { color:#0B3155!important; font-weight:700!important; }
+div[data-testid="stPlotlyChart"] { background:#FFFFFF; border:1px solid #E1E8F0;
+  border-radius:13px; padding:7px; box-shadow:0 3px 14px rgba(15,23,42,.035); }
+div[data-testid="stDataFrame"] { border:1px solid #E1E8F0; border-radius:11px;
+  overflow:hidden; box-shadow:0 2px 10px rgba(15,23,42,.03); }
+div[data-testid="stExpander"] { background:#FFFFFF; box-shadow:0 2px 10px rgba(15,23,42,.025); }
+[data-testid="stDownloadButton"] button { min-height:40px; padding:0 16px; }
+@media (max-width:1100px) {
+  .block-container { padding:1.5rem 1.4rem 3rem; }
+  .kpi-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .stTabs [data-baseweb="tab-list"] { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .topbar { align-items:flex-start; } .chips { justify-content:flex-start; }
+}
+@media (max-width:650px) {
+  .kpi-grid,.stTabs [data-baseweb="tab-list"] { grid-template-columns:1fr; }
+  .block-container { padding:1rem .85rem 2.5rem; }
+  .hero { padding:1rem; }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -412,6 +480,8 @@ def run_bank(scenario_key, horizon, dr_pct, pd_scaler, lgd_scaler, hazard="Flood
     SC = SCENARIOS[scenario_key]
     yrs = np.arange(2024, 2024 + horizon + 1)
     dr = dr_pct / 100.0
+    mortgage_lgd_end = run_mortgage_physical(
+        scenario_key, int(yrs[-1]), lgd_scaler, hazard)["stressed_lgd"].mean()
     rows, annual_total = [], np.zeros(len(yrs))
     annual_tr, annual_ph = np.zeros(len(yrs)), np.zeros(len(yrs))
     for name, s in SECTORS.items():
@@ -427,9 +497,8 @@ def run_bank(scenario_key, horizon, dr_pct, pd_scaler, lgd_scaler, hazard="Flood
             # Physical: mortgages use record-level collateral repricing; other
             # portfolios retain transparent screening proxies pending facility data.
             if name == "Residential Mortgages":
-                mortgage_lgd = run_mortgage_physical(
-                    scenario_key, int(y), lgd_scaler, hazard)["stressed_lgd"].mean()
-                lgd_t = max(lgd0, mortgage_lgd)
+                path_fraction = (y - 2024) / max(horizon, 1)
+                lgd_t = lgd0 + max(mortgage_lgd_end - lgd0, 0) * path_fraction
             else:
                 lgd_t = lgd0 + (s["phys_lgd_pp"] / 100) * ((y - 2024) / 26) * SC["phys_mult"] * lgd_scaler
             pd_t = np.clip(pd_t, 0.0, 1.0)
@@ -541,7 +610,7 @@ tr_share_tot = df["Transition_M"].sum() / total_uplift * 100 if total_uplift > 0
 
 # ── Top bar ───────────────────────────────────────────────────────────────────
 st.markdown(f"""
-<div class="topbar">
+<div class="topbar hero">
   <div>
     <div class="crumb">Workspace &nbsp;/&nbsp; RBC (RY) — Bank &nbsp;/&nbsp; Climate Credit Risk</div>
     <div class="page-hdr">
@@ -562,49 +631,43 @@ st.markdown(f"""
 
 st.markdown("""
 <div class="note" style="margin:-.4rem 0 1rem">
-  <b>Demo disclaimer:</b> sector exposures, PDs and LGDs are order-of-magnitude
-  approximations calibrated to RBC FY2024 public disclosures (Annual Report, 2024
-  Climate Report, Pillar 3) for methodology demonstration. They are <b>not</b> RBC's
-  actual risk parameters. A production run would ingest internal IRB PD/LGD, EAD at
-  facility level, and postal-code collateral hazard data.
+  <b>Illustrative model:</b> public disclosures and synthetic exposures demonstrate the
+  methodology; no RBC customer data or internal risk parameters are used. Production
+  deployment would replace these inputs with facility-level IRB and geocoded collateral data.
 </div>""", unsafe_allow_html=True)
 
 # ── KPI row ───────────────────────────────────────────────────────────────────
-k1, k2, k3, k4, k5 = st.columns(5)
-for col, lbl, val, sub, bdr in [
-    (k1, "Expected-Loss Uplift (PV)", f"CAD {total_uplift:,.0f}M",
+kpi_items = [
+    ("Expected-Loss Uplift (PV)", f"CAD {total_uplift:,.0f}M",
      f"{horizon}-yr cumulative · DR {dr_pct:.1f}%", "kpi-neg"),
-    (k2, "Uplift / Loan Book",   f"{uplift_bps:,.0f} bps",
+    ("Uplift / Loan Book", f"{uplift_bps:,.0f} bps",
      f"On CAD {total_ead/1000:,.0f}B EAD", "kpi-warn"),
-    (k3, "vs Credit Allowance",  f"{pct_acl:,.0f}%",
+    ("vs Credit Allowance", f"{pct_acl:,.0f}%",
      f"Of CAD {BANK['acl_B']:.1f}B ACL (FY2024)", "kpi-warn"),
-    (k4, "vs CET1 Capital",      f"{pct_cet1:.1f}%",
+    ("vs CET1 Capital", f"{pct_cet1:.1f}%",
      f"Of ~CAD {BANK['cet1_B']:.0f}B CET1", "kpi-inf"),
-    (k5, "Top Sector",           top["Sector"].split(" (")[0],
+    ("Top Sector", top["Sector"].split(" (")[0],
      f"CAD {top['Uplift_M']:,.0f}M · {top['Uplift_M']/total_uplift*100:.0f}% of uplift", "kpi-pos"),
-]:
-    col.markdown(f"""
-    <div class="kpi {bdr}">
-      <div class="kpi-lbl">{lbl}</div>
-      <div class="kpi-val" style="font-size:1.15rem">{val}</div>
-      <div class="kpi-sub">{sub}</div>
-    </div>""", unsafe_allow_html=True)
+]
+kpi_html = ''.join(
+    f'<div class="kpi {bdr}"><div class="kpi-lbl">{lbl}</div>'
+    f'<div class="kpi-val" style="font-size:1.1rem">{val}</div>'
+    f'<div class="kpi-sub">{sub}</div></div>'
+    for lbl, val, sub, bdr in kpi_items
+)
+st.markdown(f'<div class="kpi-grid">{kpi_html}</div>', unsafe_allow_html=True)
 
 st.markdown(f"""
 <div class="note" style="margin:.8rem 0 1rem">
-  <b>Takeaway:</b> Under {scenario_name.split(' — ')[0]} over {horizon} years, modelled
-  climate drivers add <b>CAD {total_uplift:,.0f}M of discounted cumulative annual
-  expected-loss uplift</b> under a static-balance-sheet assumption
-  ({uplift_bps:,.0f} bps of the loan book) — equivalent to {pct_acl:,.0f}% of the current
-  allowance but only {pct_cet1:.1f}% of CET1 capital. Transition channels (carbon price →
-  borrower PD) drive ~{tr_share_tot:.0f}% of the uplift; the rest is collateral-hazard LGD.
-  The bank-level story mirrors the BoC-OSFI pilot: risk is <b>concentrated, not systemic</b> —
-  small in capital terms, large relative to sector-level pricing and provisioning.
+  <b>Portfolio signal:</b> {scenario_name.split(' — ')[0]} produces
+  <b>CAD {total_uplift:,.0f}M</b> of discounted cumulative annual expected-loss uplift
+  ({uplift_bps:,.0f} bps). Transition contributes ~{tr_share_tot:.0f}%; physical risk
+  contributes the balance. Impact equals {pct_acl:,.0f}% of ACL and {pct_cet1:.1f}% of CET1.
 </div>""", unsafe_allow_html=True)
 
 tabA, tabB, tabC, tabMap, tabCRE, tabECL, tabVal, tabD = st.tabs([
-    "Sector Overview", "Transition (PD)", "Physical (LGD)", "FSA Hazard Map",
-    "CRE Facilities", "Stage 1/2 ECL", "Benchmark & Validation", "Data & Method",
+    "01 · Portfolio", "02 · Transition", "03 · Physical", "04 · FSA Map",
+    "05 · CRE", "06 · Stage 1/2", "07 · Validation", "08 · Method",
 ])
 
 # ════════════════════════════════════════════════════════════════
