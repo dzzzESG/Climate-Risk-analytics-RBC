@@ -116,9 +116,11 @@ section[data-testid="stSidebar"] input[type="number"] {
 .note b { color:var(--text-note-b)!important; }
 .mbox { background:var(--bg-card-alt); border:1px solid var(--border); border-radius:8px;
   padding:.75rem 1rem; font-size:.78rem; color:var(--text-body)!important; margin-top:.5rem; }
-.stTabs [data-baseweb="tab-list"] { background:var(--bg-tab-bar); border-radius:9px; padding:4px; gap:3px; display:flex!important; }
+.stTabs [data-baseweb="tab-list"] { background:var(--bg-tab-bar); border-radius:9px; padding:4px;
+  gap:3px; display:flex!important; overflow-x:auto!important; scrollbar-width:thin; }
 .stTabs [data-baseweb="tab"] { border-radius:6px; padding:8px 4px; font-size:.84rem; font-weight:500;
-  color:var(--text-sec)!important; flex:1 1 0!important; text-align:center!important; min-width:0!important; white-space:nowrap; }
+  color:var(--text-sec)!important; flex:0 0 auto!important; text-align:center!important;
+  min-width:145px!important; white-space:nowrap; padding-left:14px; padding-right:14px; }
 .stTabs [aria-selected="true"] { background:var(--bg-tab-active)!important; color:var(--text-h)!important;
   box-shadow:0 1px 3px rgba(0,0,0,.15); font-weight:700!important; }
 div[data-testid="stExpander"] { border:1px solid var(--border)!important; border-radius:9px!important; }
@@ -139,73 +141,6 @@ div[data-testid="stExpander"] { border:1px solid var(--border)!important; border
 .js-plotly-plot .plotly .legend text { fill:#1E293B!important; }
 [data-testid="stDataFrame"] * { font-feature-settings:'tnum'; }
 
-/* ── v1.2 visual refresh ───────────────────────────────────────────── */
-.stApp { background:
-  radial-gradient(circle at 82% -8%, rgba(59,130,246,.10), transparent 28rem),
-  linear-gradient(180deg,#F8FAFC 0%,#F3F6FA 100%); }
-.block-container { max-width:1480px; padding:2rem 2.7rem 3.5rem; }
-section[data-testid="stSidebar"] { background:linear-gradient(180deg,#081B2F 0%,#102D49 100%)!important;
-  border-right:1px solid rgba(148,163,184,.16); }
-section[data-testid="stSidebar"] > div { padding-top:1.1rem; }
-section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
-  font-size:.66rem!important; letter-spacing:.08em; color:#91A7BC!important; }
-section[data-testid="stSidebar"] div[data-baseweb="select"] > div,
-section[data-testid="stSidebar"] [data-testid="stNumberInput"] > div > div {
-  background:rgba(30,58,95,.72)!important; border:1px solid rgba(125,211,252,.16)!important;
-  border-radius:9px!important; min-height:42px; }
-.hero { background:linear-gradient(120deg,#FFFFFF 0%,#F8FBFF 64%,#EEF6FF 100%);
-  border:1px solid #DCE6F1; border-radius:16px; padding:1.25rem 1.4rem;
-  box-shadow:0 8px 30px rgba(15,23,42,.055); margin-bottom:1rem; }
-.hero .page-hdr h1 { font-size:1.5rem; letter-spacing:-.035em; }
-.hero .page-hdr h1 { color:#102A43!important; }
-.hero .page-hdr p { margin-top:.35rem; color:#62748A!important; }
-.hero .crumb { color:#3B82F6!important; }
-.hdr-rule { display:none; }
-.chips { max-width:650px; justify-content:flex-end; }
-.pill { background:rgba(255,255,255,.86); border-color:#D8E3EF; padding:5px 10px;
-  box-shadow:0 1px 2px rgba(15,23,42,.03); }
-.note { border:1px solid #D7EAF8; border-left:3px solid #38BDF8; border-radius:9px;
-  line-height:1.55; box-shadow:0 2px 8px rgba(15,23,42,.025);
-  background:#F0F8FF!important; color:#24435E!important; }
-.note b { color:#0B6095!important; }
-.mbox { line-height:1.62; border-color:#E1E8F0; background:#F8FAFC!important;
-  color:#3C4D61!important; }
-.mbox b { color:#183B56!important; }
-.sec { margin-top:.35rem; padding:.25rem 0 .65rem; font-size:1.02rem;
-  border-bottom:1px solid #DCE5EF; letter-spacing:-.015em; color:#17324D!important; }
-.kpi-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; margin:.9rem 0 1rem; }
-.kpi { min-height:102px; padding:1rem 1.05rem; border-radius:12px;
-  box-shadow:0 3px 14px rgba(15,23,42,.04); background:#FFFFFF!important;
-  border-color:#DCE5EF!important; }
-.kpi-lbl { color:#718096!important; }
-.kpi-val { color:#102A43!important; }
-.kpi-sub { color:#8A98A8!important; }
-.kpi-val { margin-top:7px; }
-.stTabs [data-baseweb="tab-list"] { display:grid!important;
-  grid-template-columns:repeat(4,minmax(0,1fr)); gap:5px; padding:6px;
-  background:#E6ECF3; border-radius:12px; margin:1.1rem 0 1.35rem; }
-.stTabs [data-baseweb="tab"] { min-height:42px; padding:8px 10px; border-radius:8px;
-  font-size:.79rem; overflow:hidden; text-overflow:ellipsis; color:#60758A!important; }
-.stTabs [aria-selected="true"] { color:#0B3155!important; background:#FFFFFF!important;
-  box-shadow:0 2px 8px rgba(15,23,42,.10); }
-.stTabs [aria-selected="true"] p { color:#0B3155!important; font-weight:700!important; }
-div[data-testid="stPlotlyChart"] { background:#FFFFFF; border:1px solid #E1E8F0;
-  border-radius:13px; padding:7px; box-shadow:0 3px 14px rgba(15,23,42,.035); }
-div[data-testid="stDataFrame"] { border:1px solid #E1E8F0; border-radius:11px;
-  overflow:hidden; box-shadow:0 2px 10px rgba(15,23,42,.03); }
-div[data-testid="stExpander"] { background:#FFFFFF; box-shadow:0 2px 10px rgba(15,23,42,.025); }
-[data-testid="stDownloadButton"] button { min-height:40px; padding:0 16px; }
-@media (max-width:1100px) {
-  .block-container { padding:1.5rem 1.4rem 3rem; }
-  .kpi-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .stTabs [data-baseweb="tab-list"] { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .topbar { align-items:flex-start; } .chips { justify-content:flex-start; }
-}
-@media (max-width:650px) {
-  .kpi-grid,.stTabs [data-baseweb="tab-list"] { grid-template-columns:1fr; }
-  .block-container { padding:1rem .85rem 2.5rem; }
-  .hero { padding:1rem; }
-}
 </style>
 """, unsafe_allow_html=True)
 
@@ -610,7 +545,7 @@ tr_share_tot = df["Transition_M"].sum() / total_uplift * 100 if total_uplift > 0
 
 # ── Top bar ───────────────────────────────────────────────────────────────────
 st.markdown(f"""
-<div class="topbar hero">
+<div class="topbar">
   <div>
     <div class="crumb">Workspace &nbsp;/&nbsp; RBC (RY) — Bank &nbsp;/&nbsp; Climate Credit Risk</div>
     <div class="page-hdr">
@@ -637,25 +572,25 @@ st.markdown("""
 </div>""", unsafe_allow_html=True)
 
 # ── KPI row ───────────────────────────────────────────────────────────────────
-kpi_items = [
-    ("Expected-Loss Uplift (PV)", f"CAD {total_uplift:,.0f}M",
+k1, k2, k3, k4, k5 = st.columns(5)
+for col, lbl, val, sub, bdr in [
+    (k1, "Expected-Loss Uplift (PV)", f"CAD {total_uplift:,.0f}M",
      f"{horizon}-yr cumulative · DR {dr_pct:.1f}%", "kpi-neg"),
-    ("Uplift / Loan Book", f"{uplift_bps:,.0f} bps",
+    (k2, "Uplift / Loan Book", f"{uplift_bps:,.0f} bps",
      f"On CAD {total_ead/1000:,.0f}B EAD", "kpi-warn"),
-    ("vs Credit Allowance", f"{pct_acl:,.0f}%",
+    (k3, "vs Credit Allowance", f"{pct_acl:,.0f}%",
      f"Of CAD {BANK['acl_B']:.1f}B ACL (FY2024)", "kpi-warn"),
-    ("vs CET1 Capital", f"{pct_cet1:.1f}%",
+    (k4, "vs CET1 Capital", f"{pct_cet1:.1f}%",
      f"Of ~CAD {BANK['cet1_B']:.0f}B CET1", "kpi-inf"),
-    ("Top Sector", top["Sector"].split(" (")[0],
+    (k5, "Top Sector", top["Sector"].split(" (")[0],
      f"CAD {top['Uplift_M']:,.0f}M · {top['Uplift_M']/total_uplift*100:.0f}% of uplift", "kpi-pos"),
-]
-kpi_html = ''.join(
-    f'<div class="kpi {bdr}"><div class="kpi-lbl">{lbl}</div>'
-    f'<div class="kpi-val" style="font-size:1.1rem">{val}</div>'
-    f'<div class="kpi-sub">{sub}</div></div>'
-    for lbl, val, sub, bdr in kpi_items
-)
-st.markdown(f'<div class="kpi-grid">{kpi_html}</div>', unsafe_allow_html=True)
+]:
+    col.markdown(f"""
+    <div class="kpi {bdr}">
+      <div class="kpi-lbl">{lbl}</div>
+      <div class="kpi-val" style="font-size:1.15rem">{val}</div>
+      <div class="kpi-sub">{sub}</div>
+    </div>""", unsafe_allow_html=True)
 
 st.markdown(f"""
 <div class="note" style="margin:.8rem 0 1rem">
@@ -665,9 +600,10 @@ st.markdown(f"""
   contributes the balance. Impact equals {pct_acl:,.0f}% of ACL and {pct_cet1:.1f}% of CET1.
 </div>""", unsafe_allow_html=True)
 
-tabA, tabB, tabC, tabMap, tabCRE, tabECL, tabVal, tabD = st.tabs([
-    "01 · Portfolio", "02 · Transition", "03 · Physical", "04 · FSA Map",
-    "05 · CRE", "06 · Stage 1/2", "07 · Validation", "08 · Method",
+tabA, tabB, tabC, tabMap, tabCRE, tabECL, tabVal, tabInsights, tabD = st.tabs([
+    "Sector Overview", "Transition Channel (PD)", "Physical Channel (LGD)", "FSA Hazard Map",
+    "CRE Facilities", "Stage 1/2 ECL", "Benchmark & Validation", "Management Insights",
+    "Data Requirements & Method",
 ])
 
 # ════════════════════════════════════════════════════════════════
@@ -1046,6 +982,150 @@ with tabVal:
     available, the same controls can compare coverage, spatial ranking, return-period
     losses, high-risk overlap, sensitivity, stability and model limitations.</div>
     """, unsafe_allow_html=True)
+
+# ════════════════════════════════════════════════════════════════
+#  MANAGEMENT INSIGHTS — decision-useful, scenario-responsive brief
+# ════════════════════════════════════════════════════════════════
+with tabInsights:
+    st.markdown('<div class="sec">Management Insights — Portfolio Assessment</div>',
+                unsafe_allow_html=True)
+
+    physical_share = 100 - tr_share_tot
+    top3 = df.nlargest(3, "Uplift_M")
+    top3_names = ", ".join(top3["Sector"].tolist())
+    hotspot = exposure.sort_values("RiskEAD", ascending=False).iloc[0]
+    cre_value_decline = 1 - cre["stressed_value"].sum() / cre["property_value"].sum()
+    cre_underwater = cre.loc[cre["stressed_ltv"] > 1, "ead"].sum() / cre["ead"].sum()
+    stage2_ead = loans.loc[loans["stage"] == 2, "ead"].sum() / loans["ead"].sum()
+    if pct_acl >= 25:
+        materiality, materiality_color = "High", "#DC2626"
+    elif pct_acl >= 10:
+        materiality, materiality_color = "Elevated", "#D97706"
+    else:
+        materiality, materiality_color = "Moderate", "#2563EB"
+    materiality_article = "an" if materiality == "Elevated" else "a"
+
+    st.markdown(f"""
+    <div class="note" style="margin:0 0 1rem;border-left-color:{materiality_color}">
+      <b>Executive conclusion:</b> The {scenario_name} scenario produces
+      <b>{materiality_article} {materiality.lower()} management impact</b> over the selected {horizon}-year horizon.
+      Expected-loss uplift is concentrated in <b>{top3_names}</b>. Transition risk remains
+      the primary portfolio driver ({tr_share_tot:.0f}%), while {hazard_name.lower()}-related
+      physical risk accounts for approximately {physical_share:.0f}% of modelled uplift.
+    </div>""", unsafe_allow_html=True)
+
+    mi1, mi2, mi3, mi4 = st.columns(4)
+    for col, label, value, sub, border in [
+        (mi1, "Management Materiality", materiality,
+         f"{pct_acl:.0f}% of ACL · {pct_cet1:.1f}% of CET1", "kpi-warn"),
+        (mi2, "Physical Risk Share", f"{physical_share:.0f}%",
+         f"Selected hazard: {hazard_name}", "kpi-inf"),
+        (mi3, "CRE Value Decline", f"{cre_value_decline:.1%}",
+         f"Underwater EAD: {cre_underwater:.1%}", "kpi-neg"),
+        (mi4, "Stage 2 EAD", f"{stage2_ead:.1%}",
+         "Illustrative SICR migration", "kpi-pos"),
+    ]:
+        col.markdown(f"""
+        <div class="kpi {border}">
+          <div class="kpi-lbl">{label}</div>
+          <div class="kpi-val" style="font-size:1.2rem">{value}</div>
+          <div class="kpi-sub">{sub}</div>
+        </div>""", unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+    ins1, ins2 = st.columns([3, 2])
+    with ins1:
+        st.markdown('<div class="sec">Priority Findings</div>', unsafe_allow_html=True)
+        priority_findings = pd.DataFrame([
+            ["1", "Portfolio concentration", top["Sector"],
+             f"CAD {top['Uplift_M']:,.0f}M ({top['Uplift_M']/total_uplift:.0%} of uplift)",
+             "Review sector limits, pricing and risk appetite"],
+            ["2", "Geographic physical risk", f"FSA {hotspot['fsa']} · {hotspot['province']}",
+             f"{hazard_name} score {hotspot['HazardScore']:.2f}",
+             "Validate geocoding, insurance and collateral coverage"],
+            ["3", "CRE collateral", "Synthetic CRE portfolio",
+             f"Value decline {cre_value_decline:.1%}; underwater EAD {cre_underwater:.1%}",
+             "Prioritize facility-level appraisal and covenant review"],
+            ["4", "Credit migration", "Stage 2 watchlist",
+             f"{stage2_ead:.1%} of CRE EAD under illustrative SICR",
+             "Run approved SICR thresholds and lifetime ECL overlays"],
+        ], columns=["Priority", "Risk theme", "Where", "Model signal", "Management response"])
+        _df(priority_findings, hide_index=True)
+
+        st.markdown('<div class="sec">Sector Watchlist</div>', unsafe_allow_html=True)
+        watchlist = top3[["Sector", "EAD_M", "Uplift_M", "Uplift_bps",
+                          "Transition_M", "Physical_M"]].copy()
+        watchlist["Primary driver"] = np.where(
+            watchlist["Transition_M"] >= watchlist["Physical_M"], "Transition", "Physical")
+        watchlist["Share of uplift"] = watchlist["Uplift_M"] / total_uplift
+        watchlist = watchlist[["Sector", "Primary driver", "Share of uplift", "Uplift_bps"]]
+        watchlist.columns = ["Sector", "Primary driver", "Portfolio uplift share", "Intensity (bps)"]
+        watchlist["Portfolio uplift share"] = watchlist["Portfolio uplift share"].map(lambda x: f"{x:.1%}")
+        watchlist["Intensity (bps)"] = watchlist["Intensity (bps)"].map(lambda x: f"{x:,.0f}")
+        _df(watchlist, hide_index=True)
+
+    with ins2:
+        st.markdown('<div class="sec">Recommended Actions</div>', unsafe_allow_html=True)
+        st.markdown(f"""
+        <div class="mbox" style="margin-top:0">
+          <b>0–30 days · Validate</b><br>
+          Reconcile the top three sector results; review FSA {hotspot['fsa']} collateral
+          geocoding, insurance coverage and hazard-data quality.<br><br>
+          <b>30–60 days · Challenge</b><br>
+          Run alternative damage curves, SICR thresholds and third-party hazard benchmarks;
+          document sensitivity ranges and model limitations.<br><br>
+          <b>60–90 days · Decide</b><br>
+          Assess implications for sector limits, CRE underwriting, collateral monitoring,
+          pricing and management overlays.<br><br>
+          <b>Governance</b><br>
+          Assign Credit Risk as metric owner, Climate Risk as methodology owner and Model
+          Validation as independent challenger before production use.
+        </div>""", unsafe_allow_html=True)
+
+        st.markdown('<div class="sec">Management Decision</div>', unsafe_allow_html=True)
+        if materiality == "High":
+            decision = "Escalate for Risk Committee review and commission a facility-level deep dive."
+        elif materiality == "Elevated":
+            decision = "Add to the quarterly climate-risk watchlist and validate key concentrations."
+        else:
+            decision = "Continue monitoring through regular portfolio reporting and sensitivity testing."
+        st.markdown(f'<div class="note"><b>Suggested disposition:</b> {decision}</div>',
+                    unsafe_allow_html=True)
+
+    management_memo = f"""# Climate Risk Management Brief
+
+**Scenario:** {scenario_name}  
+**Hazard:** {hazard_name}  
+**Horizon:** {horizon} years  
+**Assessment:** {materiality}
+
+## Executive conclusion
+The selected scenario produces CAD {total_uplift:,.0f}M of discounted cumulative annual
+expected-loss uplift ({uplift_bps:,.0f} bps), equal to {pct_acl:.0f}% of ACL and
+{pct_cet1:.1f}% of CET1. Transition risk contributes approximately {tr_share_tot:.0f}%
+and physical risk {physical_share:.0f}%.
+
+## Priority concentrations
+- Leading sector: {top['Sector']} — CAD {top['Uplift_M']:,.0f}M
+- Top three sectors: {top3_names}
+- Physical-risk hotspot: FSA {hotspot['fsa']} ({hotspot['province']})
+- CRE collateral value decline: {cre_value_decline:.1%}
+- CRE underwater EAD: {cre_underwater:.1%}
+- Illustrative Stage 2 EAD: {stage2_ead:.1%}
+
+## Recommended decision
+{decision}
+
+## Next actions
+1. Validate facility-level exposure, geocoding, insurance and collateral data.
+2. Challenge damage functions, SICR assumptions and model sensitivity.
+3. Assess implications for risk appetite, sector limits, pricing and monitoring.
+4. Obtain independent model validation before production use.
+
+*Public-data methodology prototype using synthetic exposures; not an internal bank result.*
+"""
+    st.download_button("Download Management Brief (.md)", management_memo.encode("utf-8"),
+        file_name=f"climate_risk_management_brief_{date.today()}.md", mime="text/markdown")
 
 # ════════════════════════════════════════════════════════════════
 #  TAB D — DATA REQUIREMENTS & METHOD
